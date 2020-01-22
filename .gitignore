@@ -85,3 +85,10 @@
 *.elf
 *.bmm
 *.xmp
+
+
+#####
+#Extraneous Files for VSCode/Python Stuff
+#####
+*.py
+*.json
