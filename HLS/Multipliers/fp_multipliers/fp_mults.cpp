@@ -213,55 +213,7 @@ void fp_sop
 	fm_t mult_buf_47;
 	fm_t mult_buf_48;
 
-#pragma HLS resource variable=mult_buf_0 core=DSP48
-#pragma HLS resource variable=mult_buf_1 core=DSP48
-#pragma HLS resource variable=mult_buf_2 core=DSP48
-#pragma HLS resource variable=mult_buf_3 core=DSP48
-#pragma HLS resource variable=mult_buf_4 core=DSP48
-#pragma HLS resource variable=mult_buf_5 core=DSP48
-#pragma HLS resource variable=mult_buf_6 core=DSP48
-#pragma HLS resource variable=mult_buf_7 core=DSP48
-#pragma HLS resource variable=mult_buf_8 core=DSP48
-#pragma HLS resource variable=mult_buf_9 core=DSP48
-#pragma HLS resource variable=mult_buf_10 core=DSP48
-#pragma HLS resource variable=mult_buf_11 core=DSP48
-#pragma HLS resource variable=mult_buf_12 core=DSP48
-#pragma HLS resource variable=mult_buf_13 core=DSP48
-#pragma HLS resource variable=mult_buf_14 core=DSP48
-#pragma HLS resource variable=mult_buf_15 core=DSP48
-#pragma HLS resource variable=mult_buf_16 core=DSP48
-#pragma HLS resource variable=mult_buf_17 core=DSP48
-#pragma HLS resource variable=mult_buf_18 core=DSP48
-#pragma HLS resource variable=mult_buf_19 core=DSP48
-#pragma HLS resource variable=mult_buf_20 core=DSP48
-#pragma HLS resource variable=mult_buf_21 core=DSP48
-#pragma HLS resource variable=mult_buf_22 core=DSP48
-#pragma HLS resource variable=mult_buf_23 core=DSP48
-#pragma HLS resource variable=mult_buf_24 core=DSP48
-#pragma HLS resource variable=mult_buf_25 core=DSP48
-#pragma HLS resource variable=mult_buf_26 core=DSP48
-#pragma HLS resource variable=mult_buf_27 core=DSP48
-#pragma HLS resource variable=mult_buf_28 core=DSP48
-#pragma HLS resource variable=mult_buf_29 core=DSP48
-#pragma HLS resource variable=mult_buf_30 core=DSP48
-#pragma HLS resource variable=mult_buf_31 core=DSP48
-#pragma HLS resource variable=mult_buf_32 core=DSP48
-#pragma HLS resource variable=mult_buf_33 core=DSP48
-#pragma HLS resource variable=mult_buf_34 core=DSP48
-#pragma HLS resource variable=mult_buf_35 core=DSP48
-#pragma HLS resource variable=mult_buf_36 core=DSP48
-#pragma HLS resource variable=mult_buf_37 core=DSP48
-#pragma HLS resource variable=mult_buf_38 core=DSP48
-#pragma HLS resource variable=mult_buf_39 core=DSP48
-#pragma HLS resource variable=mult_buf_40 core=DSP48
-#pragma HLS resource variable=mult_buf_41 core=DSP48
-#pragma HLS resource variable=mult_buf_42 core=DSP48
-#pragma HLS resource variable=mult_buf_43 core=DSP48
-#pragma HLS resource variable=mult_buf_44 core=DSP48
-#pragma HLS resource variable=mult_buf_45 core=DSP48
-#pragma HLS resource variable=mult_buf_46 core=DSP48
-#pragma HLS resource variable=mult_buf_47 core=DSP48
-#pragma HLS resource variable=mult_buf_48 core=DSP48
+
 
 
 	mult_buf_0 = kernel_patch_0 * pixel_window_0 ;

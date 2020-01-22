@@ -101,9 +101,9 @@ image window to read in the new pixel values from the Line Buffers and UART resp
 
 
 reg [7:0] shift_register_array [0:6][0:6]; 
+integer i,j; 
 
-
-always_ff @ (posedge clk) 
+always @ (posedge clk or negedge rst) 
 
     begin
     
@@ -111,10 +111,10 @@ always_ff @ (posedge clk)
         if (!rst) //active low reset signal, set all image window values to zero
             begin
             
-                for (int i = 0; i < 7; i++)
+                for (i = 0; i < 7; i = i + 1)
                     begin
                     
-                        for (int j = 0; j < 7; j++)
+                        for (j = 0; j < 7; j = j + 1)
                         begin
                         
                             shift_register_array[i][j] <= 0; 
@@ -134,7 +134,7 @@ always_ff @ (posedge clk)
                     begin
                     
                     //Classic Shift Algorithm, nothing fancy here
-                    for (int i = 0; i < 6; i++)
+                    for (i = 0; i < 6; i = i + 1)
                         begin
                         shift_register_array[0][i] <= shift_register_array[0][i+1];
                         shift_register_array[1][i] <= shift_register_array[1][i+1];

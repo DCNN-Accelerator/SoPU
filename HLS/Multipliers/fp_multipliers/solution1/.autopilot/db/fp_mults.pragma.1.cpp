@@ -1,5 +1,5 @@
-# 1 "fp_mults.cpp"
-# 1 "fp_mults.cpp" 1
+# 1 "fp_multipliers/fp_mults.cpp"
+# 1 "fp_multipliers/fp_mults.cpp" 1
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 152 "<built-in>" 3
@@ -145,8 +145,8 @@ extern "C" {
 }
 # 9 "<command line>" 2
 # 1 "<built-in>" 2
-# 1 "fp_mults.cpp" 2
-# 1 "./fp_mults.hpp" 1
+# 1 "fp_multipliers/fp_mults.cpp" 2
+# 1 "fp_multipliers/fp_mults.hpp" 1
 
 
 
@@ -24367,7 +24367,7 @@ inline bool operator!=(
 
 }
 # 62 "C:/Xilinx/Vivado/2018.2/common/technology/autopilot\\ap_fixed.h" 2
-# 5 "./fp_mults.hpp" 2
+# 5 "fp_multipliers/fp_mults.hpp" 2
 
 typedef ap_fixed<8,1,SC_RND> kernel_t;
 typedef ap_ufixed<8,8,SC_RND> pixel_t;
@@ -24485,7 +24485,7 @@ void fp_sop
 
   fm_t &out_val
   );
-# 2 "fp_mults.cpp" 2
+# 2 "fp_multipliers/fp_mults.cpp" 2
 
 
 
@@ -24700,449 +24700,58 @@ _ssdm_op_SpecInterface(0, "ap_ctrl_none", 0, 0, "", 0, 0, "", "", "", 0, 0, 0, 0
  fm_t mult_buf_47;
  fm_t mult_buf_48;
 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
-#pragma 
 
 
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_0_Region_fp_mults.cpp:267:2");
-# 267 "fp_mults.cpp"
-mult_buf_0 = kernel_patch_0 * pixel_window_0 ;
-_ssdm_op_SpecResource(&mult_buf_0, "?DSP48_mult_buf_0_Region_fp_mults.cpp:267:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_0_Region_fp_mults.cpp:267:2"); }
-# 267 "fp_mults.cpp"
 
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_1_Region_fp_mults.cpp:268:2");
-# 268 "fp_mults.cpp"
-mult_buf_1 = kernel_patch_1 * pixel_window_1 ;
-_ssdm_op_SpecResource(&mult_buf_1, "?DSP48_mult_buf_1_Region_fp_mults.cpp:268:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_1_Region_fp_mults.cpp:268:2"); }
-# 268 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_2_Region_fp_mults.cpp:269:2");
-# 269 "fp_mults.cpp"
-mult_buf_2 = kernel_patch_2 * pixel_window_2 ;
-_ssdm_op_SpecResource(&mult_buf_2, "?DSP48_mult_buf_2_Region_fp_mults.cpp:269:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_2_Region_fp_mults.cpp:269:2"); }
-# 269 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_3_Region_fp_mults.cpp:270:2");
-# 270 "fp_mults.cpp"
-mult_buf_3 = kernel_patch_3 * pixel_window_3 ;
-_ssdm_op_SpecResource(&mult_buf_3, "?DSP48_mult_buf_3_Region_fp_mults.cpp:270:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_3_Region_fp_mults.cpp:270:2"); }
-# 270 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_4_Region_fp_mults.cpp:271:2");
-# 271 "fp_mults.cpp"
-mult_buf_4 = kernel_patch_4 * pixel_window_4 ;
-_ssdm_op_SpecResource(&mult_buf_4, "?DSP48_mult_buf_4_Region_fp_mults.cpp:271:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_4_Region_fp_mults.cpp:271:2"); }
-# 271 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_5_Region_fp_mults.cpp:272:2");
-# 272 "fp_mults.cpp"
-mult_buf_5 = kernel_patch_5 * pixel_window_5 ;
-_ssdm_op_SpecResource(&mult_buf_5, "?DSP48_mult_buf_5_Region_fp_mults.cpp:272:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_5_Region_fp_mults.cpp:272:2"); }
-# 272 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_6_Region_fp_mults.cpp:273:2");
-# 273 "fp_mults.cpp"
-mult_buf_6 = kernel_patch_6 * pixel_window_6 ;
-_ssdm_op_SpecResource(&mult_buf_6, "?DSP48_mult_buf_6_Region_fp_mults.cpp:273:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_6_Region_fp_mults.cpp:273:2"); }
-# 273 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_7_Region_fp_mults.cpp:274:2");
-# 274 "fp_mults.cpp"
-mult_buf_7 = kernel_patch_7 * pixel_window_7 ;
-_ssdm_op_SpecResource(&mult_buf_7, "?DSP48_mult_buf_7_Region_fp_mults.cpp:274:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_7_Region_fp_mults.cpp:274:2"); }
-# 274 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_8_Region_fp_mults.cpp:275:2");
-# 275 "fp_mults.cpp"
-mult_buf_8 = kernel_patch_8 * pixel_window_8 ;
-_ssdm_op_SpecResource(&mult_buf_8, "?DSP48_mult_buf_8_Region_fp_mults.cpp:275:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_8_Region_fp_mults.cpp:275:2"); }
-# 275 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_9_Region_fp_mults.cpp:276:2");
-# 276 "fp_mults.cpp"
-mult_buf_9 = kernel_patch_9 * pixel_window_9 ;
-_ssdm_op_SpecResource(&mult_buf_9, "?DSP48_mult_buf_9_Region_fp_mults.cpp:276:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_9_Region_fp_mults.cpp:276:2"); }
-# 276 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_10_Region_fp_mults.cpp:277:2");
-# 277 "fp_mults.cpp"
-mult_buf_10 = kernel_patch_10 * pixel_window_10 ;
-_ssdm_op_SpecResource(&mult_buf_10, "?DSP48_mult_buf_10_Region_fp_mults.cpp:277:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_10_Region_fp_mults.cpp:277:2"); }
-# 277 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_11_Region_fp_mults.cpp:278:2");
-# 278 "fp_mults.cpp"
-mult_buf_11 = kernel_patch_11 * pixel_window_11 ;
-_ssdm_op_SpecResource(&mult_buf_11, "?DSP48_mult_buf_11_Region_fp_mults.cpp:278:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_11_Region_fp_mults.cpp:278:2"); }
-# 278 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_12_Region_fp_mults.cpp:279:2");
-# 279 "fp_mults.cpp"
-mult_buf_12 = kernel_patch_12 * pixel_window_12 ;
-_ssdm_op_SpecResource(&mult_buf_12, "?DSP48_mult_buf_12_Region_fp_mults.cpp:279:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_12_Region_fp_mults.cpp:279:2"); }
-# 279 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_13_Region_fp_mults.cpp:280:2");
-# 280 "fp_mults.cpp"
-mult_buf_13 = kernel_patch_13 * pixel_window_13 ;
-_ssdm_op_SpecResource(&mult_buf_13, "?DSP48_mult_buf_13_Region_fp_mults.cpp:280:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_13_Region_fp_mults.cpp:280:2"); }
-# 280 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_14_Region_fp_mults.cpp:281:2");
-# 281 "fp_mults.cpp"
-mult_buf_14 = kernel_patch_14 * pixel_window_14 ;
-_ssdm_op_SpecResource(&mult_buf_14, "?DSP48_mult_buf_14_Region_fp_mults.cpp:281:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_14_Region_fp_mults.cpp:281:2"); }
-# 281 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_15_Region_fp_mults.cpp:282:2");
-# 282 "fp_mults.cpp"
-mult_buf_15 = kernel_patch_15 * pixel_window_15 ;
-_ssdm_op_SpecResource(&mult_buf_15, "?DSP48_mult_buf_15_Region_fp_mults.cpp:282:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_15_Region_fp_mults.cpp:282:2"); }
-# 282 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_16_Region_fp_mults.cpp:283:2");
-# 283 "fp_mults.cpp"
-mult_buf_16 = kernel_patch_16 * pixel_window_16 ;
-_ssdm_op_SpecResource(&mult_buf_16, "?DSP48_mult_buf_16_Region_fp_mults.cpp:283:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_16_Region_fp_mults.cpp:283:2"); }
-# 283 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_17_Region_fp_mults.cpp:284:2");
-# 284 "fp_mults.cpp"
-mult_buf_17 = kernel_patch_17 * pixel_window_17 ;
-_ssdm_op_SpecResource(&mult_buf_17, "?DSP48_mult_buf_17_Region_fp_mults.cpp:284:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_17_Region_fp_mults.cpp:284:2"); }
-# 284 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_18_Region_fp_mults.cpp:285:2");
-# 285 "fp_mults.cpp"
-mult_buf_18 = kernel_patch_18 * pixel_window_18 ;
-_ssdm_op_SpecResource(&mult_buf_18, "?DSP48_mult_buf_18_Region_fp_mults.cpp:285:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_18_Region_fp_mults.cpp:285:2"); }
-# 285 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_19_Region_fp_mults.cpp:286:2");
-# 286 "fp_mults.cpp"
-mult_buf_19 = kernel_patch_19 * pixel_window_19 ;
-_ssdm_op_SpecResource(&mult_buf_19, "?DSP48_mult_buf_19_Region_fp_mults.cpp:286:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_19_Region_fp_mults.cpp:286:2"); }
-# 286 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_20_Region_fp_mults.cpp:287:2");
-# 287 "fp_mults.cpp"
-mult_buf_20 = kernel_patch_20 * pixel_window_20 ;
-_ssdm_op_SpecResource(&mult_buf_20, "?DSP48_mult_buf_20_Region_fp_mults.cpp:287:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_20_Region_fp_mults.cpp:287:2"); }
-# 287 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_21_Region_fp_mults.cpp:288:2");
-# 288 "fp_mults.cpp"
-mult_buf_21 = kernel_patch_21 * pixel_window_21 ;
-_ssdm_op_SpecResource(&mult_buf_21, "?DSP48_mult_buf_21_Region_fp_mults.cpp:288:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_21_Region_fp_mults.cpp:288:2"); }
-# 288 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_22_Region_fp_mults.cpp:289:2");
-# 289 "fp_mults.cpp"
-mult_buf_22 = kernel_patch_22 * pixel_window_22 ;
-_ssdm_op_SpecResource(&mult_buf_22, "?DSP48_mult_buf_22_Region_fp_mults.cpp:289:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_22_Region_fp_mults.cpp:289:2"); }
-# 289 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_23_Region_fp_mults.cpp:290:2");
-# 290 "fp_mults.cpp"
-mult_buf_23 = kernel_patch_23 * pixel_window_23 ;
-_ssdm_op_SpecResource(&mult_buf_23, "?DSP48_mult_buf_23_Region_fp_mults.cpp:290:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_23_Region_fp_mults.cpp:290:2"); }
-# 290 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_24_Region_fp_mults.cpp:291:2");
-# 291 "fp_mults.cpp"
-mult_buf_24 = kernel_patch_24 * pixel_window_24 ;
-_ssdm_op_SpecResource(&mult_buf_24, "?DSP48_mult_buf_24_Region_fp_mults.cpp:291:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_24_Region_fp_mults.cpp:291:2"); }
-# 291 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_25_Region_fp_mults.cpp:292:2");
-# 292 "fp_mults.cpp"
-mult_buf_25 = kernel_patch_25 * pixel_window_25 ;
-_ssdm_op_SpecResource(&mult_buf_25, "?DSP48_mult_buf_25_Region_fp_mults.cpp:292:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_25_Region_fp_mults.cpp:292:2"); }
-# 292 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_26_Region_fp_mults.cpp:293:2");
-# 293 "fp_mults.cpp"
-mult_buf_26 = kernel_patch_26 * pixel_window_26 ;
-_ssdm_op_SpecResource(&mult_buf_26, "?DSP48_mult_buf_26_Region_fp_mults.cpp:293:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_26_Region_fp_mults.cpp:293:2"); }
-# 293 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_27_Region_fp_mults.cpp:294:2");
-# 294 "fp_mults.cpp"
-mult_buf_27 = kernel_patch_27 * pixel_window_27 ;
-_ssdm_op_SpecResource(&mult_buf_27, "?DSP48_mult_buf_27_Region_fp_mults.cpp:294:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_27_Region_fp_mults.cpp:294:2"); }
-# 294 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_28_Region_fp_mults.cpp:295:2");
-# 295 "fp_mults.cpp"
-mult_buf_28 = kernel_patch_28 * pixel_window_28 ;
-_ssdm_op_SpecResource(&mult_buf_28, "?DSP48_mult_buf_28_Region_fp_mults.cpp:295:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_28_Region_fp_mults.cpp:295:2"); }
-# 295 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_29_Region_fp_mults.cpp:296:2");
-# 296 "fp_mults.cpp"
-mult_buf_29 = kernel_patch_29 * pixel_window_29 ;
-_ssdm_op_SpecResource(&mult_buf_29, "?DSP48_mult_buf_29_Region_fp_mults.cpp:296:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_29_Region_fp_mults.cpp:296:2"); }
-# 296 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_30_Region_fp_mults.cpp:297:2");
-# 297 "fp_mults.cpp"
-mult_buf_30 = kernel_patch_30 * pixel_window_30 ;
-_ssdm_op_SpecResource(&mult_buf_30, "?DSP48_mult_buf_30_Region_fp_mults.cpp:297:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_30_Region_fp_mults.cpp:297:2"); }
-# 297 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_31_Region_fp_mults.cpp:298:2");
-# 298 "fp_mults.cpp"
-mult_buf_31 = kernel_patch_31 * pixel_window_31 ;
-_ssdm_op_SpecResource(&mult_buf_31, "?DSP48_mult_buf_31_Region_fp_mults.cpp:298:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_31_Region_fp_mults.cpp:298:2"); }
-# 298 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_32_Region_fp_mults.cpp:299:2");
-# 299 "fp_mults.cpp"
-mult_buf_32 = kernel_patch_32 * pixel_window_32 ;
-_ssdm_op_SpecResource(&mult_buf_32, "?DSP48_mult_buf_32_Region_fp_mults.cpp:299:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_32_Region_fp_mults.cpp:299:2"); }
-# 299 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_33_Region_fp_mults.cpp:300:2");
-# 300 "fp_mults.cpp"
-mult_buf_33 = kernel_patch_33 * pixel_window_33 ;
-_ssdm_op_SpecResource(&mult_buf_33, "?DSP48_mult_buf_33_Region_fp_mults.cpp:300:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_33_Region_fp_mults.cpp:300:2"); }
-# 300 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_34_Region_fp_mults.cpp:301:2");
-# 301 "fp_mults.cpp"
-mult_buf_34 = kernel_patch_34 * pixel_window_34 ;
-_ssdm_op_SpecResource(&mult_buf_34, "?DSP48_mult_buf_34_Region_fp_mults.cpp:301:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_34_Region_fp_mults.cpp:301:2"); }
-# 301 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_35_Region_fp_mults.cpp:302:2");
-# 302 "fp_mults.cpp"
-mult_buf_35 = kernel_patch_35 * pixel_window_35 ;
-_ssdm_op_SpecResource(&mult_buf_35, "?DSP48_mult_buf_35_Region_fp_mults.cpp:302:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_35_Region_fp_mults.cpp:302:2"); }
-# 302 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_36_Region_fp_mults.cpp:303:2");
-# 303 "fp_mults.cpp"
-mult_buf_36 = kernel_patch_36 * pixel_window_36 ;
-_ssdm_op_SpecResource(&mult_buf_36, "?DSP48_mult_buf_36_Region_fp_mults.cpp:303:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_36_Region_fp_mults.cpp:303:2"); }
-# 303 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_37_Region_fp_mults.cpp:304:2");
-# 304 "fp_mults.cpp"
-mult_buf_37 = kernel_patch_37 * pixel_window_37 ;
-_ssdm_op_SpecResource(&mult_buf_37, "?DSP48_mult_buf_37_Region_fp_mults.cpp:304:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_37_Region_fp_mults.cpp:304:2"); }
-# 304 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_38_Region_fp_mults.cpp:305:2");
-# 305 "fp_mults.cpp"
-mult_buf_38 = kernel_patch_38 * pixel_window_38 ;
-_ssdm_op_SpecResource(&mult_buf_38, "?DSP48_mult_buf_38_Region_fp_mults.cpp:305:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_38_Region_fp_mults.cpp:305:2"); }
-# 305 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_39_Region_fp_mults.cpp:306:2");
-# 306 "fp_mults.cpp"
-mult_buf_39 = kernel_patch_39 * pixel_window_39 ;
-_ssdm_op_SpecResource(&mult_buf_39, "?DSP48_mult_buf_39_Region_fp_mults.cpp:306:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_39_Region_fp_mults.cpp:306:2"); }
-# 306 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_40_Region_fp_mults.cpp:307:2");
-# 307 "fp_mults.cpp"
-mult_buf_40 = kernel_patch_40 * pixel_window_40 ;
-_ssdm_op_SpecResource(&mult_buf_40, "?DSP48_mult_buf_40_Region_fp_mults.cpp:307:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_40_Region_fp_mults.cpp:307:2"); }
-# 307 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_41_Region_fp_mults.cpp:308:2");
-# 308 "fp_mults.cpp"
-mult_buf_41 = kernel_patch_41 * pixel_window_41 ;
-_ssdm_op_SpecResource(&mult_buf_41, "?DSP48_mult_buf_41_Region_fp_mults.cpp:308:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_41_Region_fp_mults.cpp:308:2"); }
-# 308 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_42_Region_fp_mults.cpp:309:2");
-# 309 "fp_mults.cpp"
-mult_buf_42 = kernel_patch_42 * pixel_window_42 ;
-_ssdm_op_SpecResource(&mult_buf_42, "?DSP48_mult_buf_42_Region_fp_mults.cpp:309:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_42_Region_fp_mults.cpp:309:2"); }
-# 309 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_43_Region_fp_mults.cpp:310:2");
-# 310 "fp_mults.cpp"
-mult_buf_43 = kernel_patch_43 * pixel_window_43 ;
-_ssdm_op_SpecResource(&mult_buf_43, "?DSP48_mult_buf_43_Region_fp_mults.cpp:310:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_43_Region_fp_mults.cpp:310:2"); }
-# 310 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_44_Region_fp_mults.cpp:311:2");
-# 311 "fp_mults.cpp"
-mult_buf_44 = kernel_patch_44 * pixel_window_44 ;
-_ssdm_op_SpecResource(&mult_buf_44, "?DSP48_mult_buf_44_Region_fp_mults.cpp:311:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_44_Region_fp_mults.cpp:311:2"); }
-# 311 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_45_Region_fp_mults.cpp:312:2");
-# 312 "fp_mults.cpp"
-mult_buf_45 = kernel_patch_45 * pixel_window_45 ;
-_ssdm_op_SpecResource(&mult_buf_45, "?DSP48_mult_buf_45_Region_fp_mults.cpp:312:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_45_Region_fp_mults.cpp:312:2"); }
-# 312 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_46_Region_fp_mults.cpp:313:2");
-# 313 "fp_mults.cpp"
-mult_buf_46 = kernel_patch_46 * pixel_window_46 ;
-_ssdm_op_SpecResource(&mult_buf_46, "?DSP48_mult_buf_46_Region_fp_mults.cpp:313:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_46_Region_fp_mults.cpp:313:2"); }
-# 313 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_47_Region_fp_mults.cpp:314:2");
-# 314 "fp_mults.cpp"
-mult_buf_47 = kernel_patch_47 * pixel_window_47 ;
-_ssdm_op_SpecResource(&mult_buf_47, "?DSP48_mult_buf_47_Region_fp_mults.cpp:314:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_47_Region_fp_mults.cpp:314:2"); }
-# 314 "fp_mults.cpp"
-
- 
-{ _ssdm_RegionBegin("?DSP48_mult_buf_48_Region_fp_mults.cpp:315:2");
-# 315 "fp_mults.cpp"
-mult_buf_48 = kernel_patch_48 * pixel_window_48 ;
-_ssdm_op_SpecResource(&mult_buf_48, "?DSP48_mult_buf_48_Region_fp_mults.cpp:315:2", "", "DSP48", "", -1, "", "", "", "", "");
-_ssdm_RegionEnd("?DSP48_mult_buf_48_Region_fp_mults.cpp:315:2"); }
-# 315 "fp_mults.cpp"
-
+ mult_buf_0 = kernel_patch_0 * pixel_window_0 ;
+ mult_buf_1 = kernel_patch_1 * pixel_window_1 ;
+ mult_buf_2 = kernel_patch_2 * pixel_window_2 ;
+ mult_buf_3 = kernel_patch_3 * pixel_window_3 ;
+ mult_buf_4 = kernel_patch_4 * pixel_window_4 ;
+ mult_buf_5 = kernel_patch_5 * pixel_window_5 ;
+ mult_buf_6 = kernel_patch_6 * pixel_window_6 ;
+ mult_buf_7 = kernel_patch_7 * pixel_window_7 ;
+ mult_buf_8 = kernel_patch_8 * pixel_window_8 ;
+ mult_buf_9 = kernel_patch_9 * pixel_window_9 ;
+ mult_buf_10 = kernel_patch_10 * pixel_window_10 ;
+ mult_buf_11 = kernel_patch_11 * pixel_window_11 ;
+ mult_buf_12 = kernel_patch_12 * pixel_window_12 ;
+ mult_buf_13 = kernel_patch_13 * pixel_window_13 ;
+ mult_buf_14 = kernel_patch_14 * pixel_window_14 ;
+ mult_buf_15 = kernel_patch_15 * pixel_window_15 ;
+ mult_buf_16 = kernel_patch_16 * pixel_window_16 ;
+ mult_buf_17 = kernel_patch_17 * pixel_window_17 ;
+ mult_buf_18 = kernel_patch_18 * pixel_window_18 ;
+ mult_buf_19 = kernel_patch_19 * pixel_window_19 ;
+ mult_buf_20 = kernel_patch_20 * pixel_window_20 ;
+ mult_buf_21 = kernel_patch_21 * pixel_window_21 ;
+ mult_buf_22 = kernel_patch_22 * pixel_window_22 ;
+ mult_buf_23 = kernel_patch_23 * pixel_window_23 ;
+ mult_buf_24 = kernel_patch_24 * pixel_window_24 ;
+ mult_buf_25 = kernel_patch_25 * pixel_window_25 ;
+ mult_buf_26 = kernel_patch_26 * pixel_window_26 ;
+ mult_buf_27 = kernel_patch_27 * pixel_window_27 ;
+ mult_buf_28 = kernel_patch_28 * pixel_window_28 ;
+ mult_buf_29 = kernel_patch_29 * pixel_window_29 ;
+ mult_buf_30 = kernel_patch_30 * pixel_window_30 ;
+ mult_buf_31 = kernel_patch_31 * pixel_window_31 ;
+ mult_buf_32 = kernel_patch_32 * pixel_window_32 ;
+ mult_buf_33 = kernel_patch_33 * pixel_window_33 ;
+ mult_buf_34 = kernel_patch_34 * pixel_window_34 ;
+ mult_buf_35 = kernel_patch_35 * pixel_window_35 ;
+ mult_buf_36 = kernel_patch_36 * pixel_window_36 ;
+ mult_buf_37 = kernel_patch_37 * pixel_window_37 ;
+ mult_buf_38 = kernel_patch_38 * pixel_window_38 ;
+ mult_buf_39 = kernel_patch_39 * pixel_window_39 ;
+ mult_buf_40 = kernel_patch_40 * pixel_window_40 ;
+ mult_buf_41 = kernel_patch_41 * pixel_window_41 ;
+ mult_buf_42 = kernel_patch_42 * pixel_window_42 ;
+ mult_buf_43 = kernel_patch_43 * pixel_window_43 ;
+ mult_buf_44 = kernel_patch_44 * pixel_window_44 ;
+ mult_buf_45 = kernel_patch_45 * pixel_window_45 ;
+ mult_buf_46 = kernel_patch_46 * pixel_window_46 ;
+ mult_buf_47 = kernel_patch_47 * pixel_window_47 ;
+ mult_buf_48 = kernel_patch_48 * pixel_window_48 ;
 
 
 
