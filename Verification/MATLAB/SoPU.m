@@ -72,10 +72,8 @@ classdef SoPU
             else 
                 obj.kernelColPtr = obj.kernelColPtr + 1;  
                 
-                
             end 
                 
-   
         end
         
         
@@ -85,8 +83,8 @@ classdef SoPU
             % This function is generic so that we can reuse both for ILB writes and for the direct UART writes
             
             
-            assert(rowPosition <= IMG_WINDOW_MAX(1),'SoPU:invalidImageWindowPointer','Invalid Image Window row index'); 
-            assert(colPosition <= IMG_WINDOW_MAX(2),'SoPU:invalidImageWindowPointer','Invalid Image Window row index'); 
+            assert(rowPosition <= obj.IM_WINDOW_MAX(1),'SoPU:invalidImageWindowPointer','Invalid Image Window row index'); 
+            assert(colPosition <= obj.IM_WINDOW_MAX(2),'SoPU:invalidImageWindowPointer','Invalid Image Window row index'); 
 
             obj.imgWindow(rowPosition,colPosition) = inputByte; 
             
@@ -94,27 +92,43 @@ classdef SoPU
             
         end 
         
-        
-        function obj = imgWindowShift(obj)
+        function img_window_element = imgWindow_Read(obj, rowPosition, colPosition)
             
+            % Simple getter method for getting an element from the image window
+            % Takes two parameters for the row/col values respectively, and returns the value at that position if the params are valid 
             
+            assert(rowPosition <= obj.IM_WINDOW_MAX(1),'SoPU:invalidImageWindowPointer','Invalid Image Window row index'); 
+            assert(colPosition <= obj.IM_WINDOW_MAX(2),'SoPU:invalidImageWindowPointer','Invalid Image Window row index'); 
             
+            img_window_element = obj.imgWindow(rowPosition, colPosition); 
             
         end 
         
         
+        function obj = imgWindowShift(obj)
+            
+            % Emulates Queue-style shifting for the image window where window[k+1] = window[k]
+            % The last column gets completely overwritten
+            
+            for i = obj.IM_WINDOW_MAX(1)-1:-1:1
+                obj.imgWindow(:,i+1) = obj.imgWindow(:,i); 
+               
+            end 
+            
+              
+        end 
         
+        function outputFM_element = run_conv(obj)
+            
+            % Computes the sum-of-products operation between the kernel patch and the image window and returns the output
+            
+            outputFM_element = sum(sum( obj.kernelPatch .* obj.imgWindow ) ); 
+            
+            
+        end 
         
-        
-        
-        
+       
     end 
-    
-    
-    
-    
-    
-    
     
     
 end
