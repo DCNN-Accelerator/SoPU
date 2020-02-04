@@ -1,3 +1,15 @@
+%% Header
+
+% Hussain Khajanchi
+% DCNN Senior Project 
+
+% SoPU module
+
+% Description - This module implements the Sum-of-Products unit for the convolutional hardware design. This module contains two arrays - one for holding the image data for the
+% current feature map output and one for holding the kernel values associated with aforementioned pixels.  
+% 
+
+%% MATLAB Class implementation
 classdef SoPU
     
     properties
@@ -77,20 +89,33 @@ classdef SoPU
         end
         
         
-        function obj = imgWindow_Write(obj, inputByte, rowPosition, colPosition)
+        function obj = imgWrite_UART(obj, inputByte)
             
-            % Writes to the object's image window given a (rowPostion, colPosition) coordinate
-            % This function is generic so that we can reuse both for ILB writes and for the direct UART writes
-            
-            
-            assert(rowPosition <= obj.IM_WINDOW_MAX(1),'SoPU:invalidImageWindowPointer','Invalid Image Window row index'); 
-            assert(colPosition <= obj.IM_WINDOW_MAX(2),'SoPU:invalidImageWindowPointer','Invalid Image Window row index'); 
+            % Writes to the object's image window into the UART slot             
+            % where UART slot is (last_row, last_col) 
 
-            obj.imgWindow(rowPosition,colPosition) = inputByte; 
+             
             
-            
+            obj.imgWindow (obj.IM_WINDOW_MAX(1), obj.IM_WINDOW_MAX(2) ) = inputByte; 
             
         end 
+        
+        function obj = imgWrite_ILB(obj, inputBytes)
+            
+            % Writes the data from ILB into the image window slot designated for ILB data
+            % ILB data coordinates = (1:max_rows-1, last_col)
+            
+%             imgWindow_input_dims = 1:obj.IM_WINDOW_MAX(1) -1 ; 
+            
+%             assert( isequal (imgWindow_input_dims, inputBytes) ); 
+            
+
+            obj.imgWindow( 1:obj.IM_WINDOW_MAX(1) -1 , obj.IM_WINDOW_MAX(2) ) = inputBytes; 
+           
+        end 
+        
+        
+        
         
         function img_window_element = imgWindow_Read(obj, rowPosition, colPosition)
             
@@ -107,14 +132,14 @@ classdef SoPU
         
         function obj = imgWindowShift(obj)
             
-            % Emulates Queue-style shifting for the image window where window[k+1] = window[k]
+            % Emulates reverse Queue-style shifting for the image window where window[k] = window[k+1]
             % The last column gets completely overwritten
-            
-            for i = obj.IM_WINDOW_MAX(1)-1:-1:1
-                obj.imgWindow(:,i+1) = obj.imgWindow(:,i); 
-               
+       
+            for i = 1:1:obj.IM_WINDOW_MAX(1)-1
+                
+                obj.imgWindow(:,i) = obj.imgWindow(:,i+1);
+                
             end 
-            
               
         end 
         

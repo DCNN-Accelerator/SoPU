@@ -1,4 +1,4 @@
-%%%
+%% ILB.m
 
 % Hussain Khajanchi 
 % DCNN Senior Project 
@@ -7,7 +7,8 @@
 
 % ILB Class Definition File 
 
-% This class emulates Integrated Line Buffer functionality that will be implemented on the FPGA. 
+% This class implements Integrated Line Buffer functionality for software emulation. This module contains an array of data that contains pixel data for reuse by the
+% SoPU. 
 
 % Class Members: 
 %     - ILB_ARRAY     : the storage module for holding local pixel data
@@ -16,7 +17,7 @@
 %     - ILB_MAX_ROWS  : the max number of rows in the ILB, useful for indexing for read/write methods
 %     - ILB_MAX_COLS  : the max number of cols in the ILB, useful for indexing for read/write methods
 
-%%%
+%% Class Definition MATLAB code
 
 classdef ILB
     
@@ -50,7 +51,7 @@ classdef ILB
         
         % Write function for ILB -- writes to the location in obj.ILB_ARRAY specified by obj.ILB_WRITE_ROW and obj.ILB_COL_PTR with the byte specified by input byte
         
-        function obj = write_byte(obj,inputByte)
+        function obj = writeByte(obj,inputByte)
             
             obj.ILB_ARRAY(obj.ILB_WRITE_ROW, obj.ILB_COL_PTR) = inputByte; 
             
@@ -77,7 +78,7 @@ classdef ILB
         end 
         
         
-        function returnPixels = read_bytes(obj)
+        function returnPixels = readBytes(obj)
             
             % Get the corresponding set of pixels starting at the "zeroth" row, or whichever row the ILB is currently writing to 
             % returnPixels is a (NUM_BUFS, 1) size column vector that will get shifted into the SoPU's image window 
