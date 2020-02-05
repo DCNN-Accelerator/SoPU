@@ -167,8 +167,13 @@ function [x] = FPGA_Runner(img_size, kernel_size)
     
     output_FM_actual = conv2(test_img,test_kernel,'same') 
     
-    output_FM_test   = transpose(reshape(arr, [6 6]))
+    output_FM_test   = transpose( reshape(arr, size(test_img)) )
 
+    if (isequal(output_FM_actual,output_FM_test))
+        disp ("Test Passed!"); 
+    else 
+        disp ("Test Failed"); 
+    end 
 
     x = arr;
 
