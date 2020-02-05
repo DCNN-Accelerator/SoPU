@@ -11,15 +11,27 @@
 
     
 %% MATLAB Implementation
-function FPGA_Runner(img_size, kernel_size)
+function [x] = FPGA_Runner(img_size, kernel_size)
 
     %% Setup for FPGA Convolution 
 
   
     % Create random integer matrix for test image and random float matrix for test kernel
     test_img    = randi(255, img_size);
-    test_kernel = rand(kernel_size); 
+    %test_kernel = rand(kernel_size);
     
+    for(i = 1 : img_size)
+        if(i == 1 || i == img_size)
+           for(x = 1 : img_size)
+               test_img((i - 1) * img_size + x) = 0;
+           end
+        else
+            test_img((i-1) * img_size + 1) = 0;
+            test_img((i-1) * img_size + img_size) = 0;
+        end
+    end
+    test_kernel = zeros(kernel_size);
+    test_kernel(((kernel_size - 1)/2 * kernel_size + (kernel_size + 1)/2)) = 1; 
     
     % Create FPGA Module Objects for full HW design emulation
     inputUART  = UART(test_img, test_kernel); 
@@ -98,8 +110,8 @@ function FPGA_Runner(img_size, kernel_size)
         disp('Current ILB array'); 
         ILB_obj.ILB_ARRAY
         
-        pause(5) 
-        clc
+        %pause(5) 
+        %clc
         
         
         inputUART = inputUART.incrementReadPtr(); 
@@ -109,10 +121,10 @@ function FPGA_Runner(img_size, kernel_size)
     
     arr = outputUART.uart_stream;
     
+    x = test_img
+    output_FM_actual = conv2(test_img,test_kernel,'same') 
     
-    output_FM_actual = conv2(test_img,test_kernel,'valid') 
-    
-    output_FM_test   = reshape(arr, [6 6])
+    output_FM_test   = transpose(reshape(arr, [6 6]))
 
 
 
