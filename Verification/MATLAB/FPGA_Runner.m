@@ -67,8 +67,10 @@ function FPGA_Runner(img_size, kernel_size)
     end 
 
     % Step 2 of Convolution Algorithm
+        
+    sopu_ctr = 0; % keeps track of when the SoPU outputs are valid 
+    numFM = numel(test_img); % for same convolution, we need the number of 
     
-    sopu_ctr = 0; 
     
     for i = kernel_length+1:1:numel(inputUART.uart_stream)-1
         
@@ -84,35 +86,75 @@ function FPGA_Runner(img_size, kernel_size)
         
         ILB_obj      = ILB_obj.writeByte(currentPixel); 
         
+        
         currentFM = SoPU_obj.run_conv();
-            
-        outputUART = outputUART.writeByte(currentFM); 
         
+        if (sopu_ctr >= img_size + round(kernel_size/2) ) % this is where the sopu starts becoming valid
+            outputUART.writeByte(currentFM); 
+        end 
         
-        disp('Image')
-        test_img
-        
-        disp('Current Image Window');
-        SoPU_obj.imgWindow
-        
-        disp('Current ILB array'); 
-        ILB_obj.ILB_ARRAY
-        
-        pause(5) 
-        clc
-        
-        
+%         disp('Image')
+%         test_img
+%         
+%         disp('Current Image Window');
+%         SoPU_obj.imgWindow
+%         
+%         disp('Current ILB array'); 
+%         ILB_obj.ILB_ARRAY
+%         
+%         disp ('SoPU Valid Counter');
+%         sopu_ctr
+%         
+%         pause(5) 
+%         clc
+%         
+        sopu_ctr  = sopu_ctr + 1; % increment SoPU counter to keep track of valid
         inputUART = inputUART.incrementReadPtr(); 
         
 
     end 
     
+    % now that the input UART bytes are done, we need to keep running the SoPU until we have all the output FM values
+    
+    for i = sopu_ctr:1:numFM
+        
+        SoPU_obj  = SoPU_obj.imgWindowShift(); 
+        
+        curr_ilb_bytes = ILB_obj.readBytes(); 
+        
+        SoPU_obj = SoPU_obj.imgWrite_ILB(curr_ilb_bytes); 
+        
+        currentFM = SoPU_obj.run_conv();
+        
+        outputUART.writeByte(currentFM); 
+        
+        
+%         disp('Image')
+%         test_img
+%         
+%         disp('Current Image Window');
+%         SoPU_obj.imgWindow
+%         
+%         disp('Current ILB array'); 
+%         ILB_obj.ILB_ARRAY
+%         
+%         disp ('SoPU Valid Counter');
+%         sopu_ctr
+%         
+%         pause(5) 
+%         clc
+%        
+
+    end 
+    
+    
     arr = outputUART.uart_stream;
     
+    assert (numel(outputUART.uart_stream) == numel(test_img)); % Checks if the 'same' convolution actually did its job
     
-    output_FM_actual = conv2(test_img,test_kernel,'valid') 
+    output_FM_actual = conv2(test_img,test_kernel,'same') 
     
-    output_FM_test   = reshape(arr, [6 6])
+    output_FM_test   = reshape(arr, size(test_img))
 
 
 
