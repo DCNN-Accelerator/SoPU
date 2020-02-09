@@ -11,7 +11,7 @@
 
     
 %% MATLAB Implementation
-function [output_test, output_real, FM_count, sopu_ctr_ret] = FPGA_Runner(img_size, kernel_size, verbose)
+function [fm_unpacked] = FPGA_Runner(img_size, kernel_size)
 
     %% Setup for FPGA Convolution 
 
@@ -20,16 +20,16 @@ function [output_test, output_real, FM_count, sopu_ctr_ret] = FPGA_Runner(img_si
     test_img    = randi(255, img_size);
         
     % Zero Pad the image for full convolution
-    for(i = 1 : img_size)
-        if(i == 1 || i == img_size)
-           for(x = 1 : img_size)
-               test_img((i - 1) * img_size + x) = 0;
-           end
-        else
-            test_img((i-1) * img_size + 1) = 0;
-            test_img((i-1) * img_size + img_size) = 0;
-        end
-    end
+%     for(i = 1 : img_size)
+%         if(i == 1 || i == img_size)
+%            for(x = 1 : img_size)
+%                test_img((i - 1) * img_size + x) = 0;
+%            end
+%         else
+%             test_img((i-1) * img_size + 1) = 0;
+%             test_img((i-1) * img_size + img_size) = 0;
+%         end
+%     end
     
     test_kernel = zeros(kernel_size);
     test_kernel(((kernel_size - 1)/2 * kernel_size + (kernel_size + 1)/2)) = 1; 
@@ -41,7 +41,16 @@ function [output_test, output_real, FM_count, sopu_ctr_ret] = FPGA_Runner(img_si
     ILB_obj    = ILB(kernel_size-1, img_size); 
     outputUART = UART( zeros(img_size),[] ); 
    
-    
+   % Parameters for Convolution Control 
+   kernel_len = numel(test_kernel); % also equal to kernel_size ^2, assuming square kernel
+   img_len    = numel(test_img); % same as numFM, but keeping the two separate for code clarity
+   numFM      = numel(test_img); % assuming 'same' style convolution
+   
+   sopu_ctr = 0; 
+   fm_ctr   = 0; 
+   
+   % When the SoPU counter reaches this point, the "convolution" starts becoming valid 
+   sop_valid_threshold = (floor(kernel_size/2) * img_size) + (floor (kernel_size/2) + 1) -1; 
 
     
     %% Convolution Algorithm Execution
@@ -65,111 +74,108 @@ function [output_test, output_real, FM_count, sopu_ctr_ret] = FPGA_Runner(img_si
     %%%
     
   
-    % Fill Kernel in SoPU
-    
-    kernel_length = kernel_size * kernel_size; 
-    
-    for i = 1:kernel_length
+    % Step 1:  Fill Kernel in SoPU
+      
+    for i = 1:kernel_len
         
         uartByte  = inputUART.readByte();        
         SoPU_obj  = SoPU_obj.kernel_write(uartByte);     
         inputUART = inputUART.incrementReadPtr(); 
         
     end 
+    
+    assert (inputUART.readPtr == (kernel_len + 1), inputUART.readPtr); %make sure we read in all the kernel values
 
     % Step 2 of Convolution Algorithm
+              
+    % Iterate through all of the input image pixels in the UART stream
+    for i = 1:img_len
         
-    sopu_ctr = 0;            % keeps track of when the SoPU outputs are valid 
-    numFM = numel(test_img); % for same convolution, we need the number of 
-    
-    FM_ctr = 0; 
-    
-    % Need to wait
-    sop_valid_threshold = (floor (kernel_size/2) * img_size) + (floor(kernel_size/2) + 1);
-    
-    for i = kernel_length+1:1:numel(inputUART.uart_stream)
-        
-        currentPixel = inputUART.readByte();
-        
-        SoPU_obj     = SoPU_obj.imgWindowShift(); 
-        
-        SoPU_obj     = SoPU_obj.imgWrite_UART(currentPixel);  
-        
+        % Read bytes from UART stream and ILB, and then write the UART value to the ILB
+        currentPixel   = inputUART.readByte();     
         curr_ilb_bytes = ILB_obj.readBytes(); 
+        ILB_obj        = ILB_obj.writeByte(currentPixel); 
+
         
-        SoPU_obj = SoPU_obj.imgWrite_ILB(curr_ilb_bytes); 
-        
-        ILB_obj      = ILB_obj.writeByte(currentPixel); 
-        
-        
-        currentFM = SoPU_obj.run_conv();
-        
-        if (sopu_ctr >= sop_valid_threshold) % this is where the sopu starts becoming valid
+        % Run the SoPU to get the next feature map, used a local function for encapsulation
+        [SoPU_obj, currentFM] = runSoPU(SoPU_obj, currentPixel, curr_ilb_bytes); 
+       
+        % if the SoPU ctr is above the threshold, start saving output FM values and increment the fm_ctr
+        if (sopu_ctr >= sop_valid_threshold)
             
             outputUART = outputUART.writeByte(currentFM);
-            FM_ctr = FM_ctr + 1; 
+            fm_ctr = fm_ctr + 1; 
             
         end 
-        
-        
+       
+        inputUART = inputUART.incrementReadPtr(); %increment read ptr for UART
         sopu_ctr  = sopu_ctr + 1; % increment SoPU counter to keep track of valid
-        
-        if (inputUART.readPtr < (numel(test_img) + numel(test_kernel) )) 
-            inputUART = inputUART.incrementReadPtr(); 
-        end  
-            
-
-    end 
-    
-    % now that the input UART bytes are done, we need to keep running the SoPU until we have all the output FM values
-    fms_computed_prev = FM_ctr;
-    
-    for i = fms_computed_prev:1:numFM
-        
-        SoPU_obj  = SoPU_obj.imgWindowShift(); 
-        curr_ilb_bytes = ILB_obj.readBytes();
-        SoPU_obj = SoPU_obj.imgWrite_ILB(curr_ilb_bytes); 
-        
-        currentFM = SoPU_obj.run_conv();
-        
-        if (outputUART.writePtr < numel(test_img))
-            outputUART = outputUART.writeByte(currentFM); 
-        end 
-        
-        FM_ctr = FM_ctr + 1; 
        
     end 
     
     
-    arr = outputUART.uart_stream;
+    assert (sopu_ctr == img_len, num2str(sopu_ctr)); % should not be over that at this point
+    assert (fm_ctr == (img_len - sop_valid_threshold), fm_ctr); 
+    assert (outputUART.writePtr == (fm_ctr + 1)); 
     
-    assert (numel(outputUART.uart_stream) == numel(test_img)); % Checks if the 'same' convolution actually did its job
     
-    if (verbose)
-        % Display outputs ..
-        output_real   = conv2(test_img,test_kernel,'same')
-
-        output_test   = transpose( reshape(arr, size(test_img)) )
+    num_fm_remaining = numFM - fm_ctr; 
+    
+    for i = 1:num_fm_remaining
         
-    else 
-        % to not display outputs.. 
-       output_real      = conv2(test_img,test_kernel,'same');
-
-       output_test      = transpose( reshape(arr, size(test_img)) );       
+        %Garbage Values now that UART is depleted
+        currentPixel   = 0; 
+        curr_ilb_bytes = ILB_obj.readBytes(); 
+        ILB_obj        = ILB_obj.writeByte(currentPixel); 
         
+        [SoPU_obj, currentFM] = runSoPU(SoPU_obj, currentPixel, curr_ilb_bytes); 
+        
+        outputUART = outputUART.writeByte(currentFM); 
+        
+        %increment helper variables
+        sopu_ctr = sopu_ctr + 1;
+        fm_ctr = fm_ctr + 1; 
+        
+  
     end 
+    
+  assert (fm_ctr == numFM);
+  
+  
+  %Compute Real Convolution
+  fm_unpacked = outputUART.uart_stream; 
+  
+  conv_test = transpose(reshape(fm_unpacked, size(test_img))); 
+  conv_real = conv2 (test_img, test_kernel, 'same'); 
+  
+  assert(isequal(conv_test,conv_real)); 
     
    
+end 
 
-    if (isequal(output_real,output_test))
-        disp ("Test Passed!"); 
-    else 
-        disp ("Test Failed"); 
-    end 
-    
-    FM_count     = FM_ctr; 
-    sopu_ctr_ret = sopu_ctr;
 
+
+function [SoPU, outputFM] = runSoPU(SoPU, uartByte, ilb_Bytes)
+
+% Given an inputByte and a vector of bytes from the ILB, this function
+% mimics the functionality of the SoPU
+
+% 1) Shift Image window
+% 2) Write uartByte to image window
+% 3) Write ilbBytes to image window
+% 4) Run Sum-of-Products and compute convolution
+
+        SoPU  = SoPU.imgWindowShift(); 
+        SoPU  = SoPU.imgWrite_UART(uartByte); 
+        SoPU  = SoPU.imgWrite_ILB(ilb_Bytes); 
+        
+        outputFM = SoPU.run_conv();
 
 
 end 
+
+
+
+
+
+

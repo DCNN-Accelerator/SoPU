@@ -54,7 +54,7 @@ classdef UART
         % Increments the UART read pointer, checks for valid indices (split from returnByte function)
         function obj = incrementReadPtr(obj)
             
-            assert( ~ (obj.readPtr == obj.UART_MAX),'Invalid UART index!');
+            assert( ~ (obj.readPtr > obj.UART_MAX),'Invalid UART index!');
             
             obj.readPtr = obj.readPtr + 1; 
             
@@ -64,7 +64,7 @@ classdef UART
         % Does index checking to avoid invalid writes 
         function obj = writeByte(obj, inputByte)
             
-            assert( ~ (obj.writePtr == obj.UART_MAX), 'Invalid UART Index!'); 
+            assert( ~ (obj.writePtr > obj.UART_MAX), 'Invalid UART Index!'); 
             
             obj.uart_stream(obj.writePtr) = inputByte; 
             
