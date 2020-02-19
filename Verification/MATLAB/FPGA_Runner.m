@@ -89,6 +89,10 @@ function [fm_unpacked] = FPGA_Runner(img_size, kernel_size)
     % Step 2 of Convolution Algorithm
               
     % Iterate through all of the input image pixels in the UART stream
+    
+    print(SoPU_obj.imgWindow,ILB_obj.ILB_ARRAY,test_img); 
+
+    
     for i = 1:img_len
         
         % Read bytes from UART stream and ILB, and then write the UART value to the ILB
@@ -108,6 +112,9 @@ function [fm_unpacked] = FPGA_Runner(img_size, kernel_size)
             
         end 
        
+        % Print function for visual debugging
+        print(SoPU_obj.imgWindow,ILB_obj.ILB_ARRAY,test_img); 
+        
         inputUART = inputUART.incrementReadPtr(); %increment read ptr for UART
         sopu_ctr  = sopu_ctr + 1; % increment SoPU counter to keep track of valid
        
@@ -132,6 +139,10 @@ function [fm_unpacked] = FPGA_Runner(img_size, kernel_size)
         
         outputUART = outputUART.writeByte(currentFM); 
         
+        print(SoPU_obj.imgWindow,ILB_obj.ILB_ARRAY,test_img); 
+
+        
+        
         %increment helper variables
         sopu_ctr = sopu_ctr + 1;
         fm_ctr = fm_ctr + 1; 
@@ -142,11 +153,11 @@ function [fm_unpacked] = FPGA_Runner(img_size, kernel_size)
   assert (fm_ctr == numFM);
   
   
-  %Compute Real Convolution
+  %% Compute Real Convolution
   fm_unpacked = outputUART.uart_stream; 
   
-  conv_test = transpose(reshape(fm_unpacked, size(test_img))); 
-  conv_real = conv2 (test_img, test_kernel, 'same'); 
+  conv_test = transpose(reshape(fm_unpacked, size(test_img))) 
+  conv_real = conv2 (test_img, test_kernel, 'same') 
   
   assert(isequal(conv_test,conv_real)); 
     
@@ -175,7 +186,34 @@ function [SoPU, outputFM] = runSoPU(SoPU, uartByte, ilb_Bytes)
 end 
 
 
+function print(img_window, ilb_array, input_img)
 
+
+% Helper function for Visual debugging 
+    
+    clc
+    
+    disp ('Input Image \n')
+    
+    input_img
+    
+    disp ('-------------------------'); 
+    
+    disp (' Image Window \n')
+    
+    img_window
+    
+    disp ('--------------------------'); 
+    
+    disp ('ILB Array')
+    
+    ilb_array
+   
+    disp ('---------------------------'); 
+    
+    pause (2); 
+    
+end 
 
 
 
